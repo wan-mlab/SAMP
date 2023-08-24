@@ -1,12 +1,4 @@
-
 ## First check availability of packages
-if(require('Peptides')){
-  library('Peptides')
-}else{
-  cat('###########Installing Peptides package in R################')
-  install.packages('Peptides')
-}
-
 if(require('protr')){
   library('protr')
 }else{
@@ -168,31 +160,17 @@ buildFeatures <- function(ampFile,nonampFile,out,split1_prop=0.2,split2_prop=0.6
   cat('SAAC done!\n')
   
   ## Assemble
-  #res <- cbind(AAC,Peptide,PAAC,NAAC,SAAC)
   res <- cbind(AAC,PAAC,NAAC,SAAC)
+                           
   ## Labels
   labels <- c(rep(1, length(amp_seq)), rep(0, length(nonamp_seq)))
-  #res <- as.data.frame(scale(as.data.frame(res)))
-  #res <- as.data.frame(t(scale(as.data.frame(t(res)))))
-  res <- as.data.frame(res)
+  res <- as.data.frame(scale(as.data.frame(res)))
   res$labels <- labels
   
   cat('Finished!\n')
   
   write.csv(res,out)
   cat('Feature matrix stored in',out,'\n')
-  
- # if(file.exists('features')){
-  #  out_name <- paste('features/',out,'.csv',sep = '')
-   # write.csv(res,out_name)
-    #cat('Feature matrix stored as',out_name)
-  #} else{
-   # dir.create('features')
-  #  out_name <- paste('features/',out,'.csv',sep = '')
-  #  write.csv(res,out_name)
-  #  cat('Feature matrix stored as',out_name)
-  #}
-  
 }
 
 
