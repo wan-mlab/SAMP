@@ -171,7 +171,7 @@ buildFeatures <- function(ampFile,nonampFile,out,split1_prop=0.2,split2_prop=0.6
   file_path <- file.path(output_path, out)
 
   write.csv(res,file_path)
-  cat('Feature matrix stored in',out,'\n')
+  cat('Feature matrix stored in',output_path,'\n')
 }
 
 
