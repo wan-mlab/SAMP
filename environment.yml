@@ -1,0 +1,13 @@
+name: SAMP
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.8
+  - pip
+  - jupyter
+  - pip:
+    - .
+  - r-base
+  - r-Peptides
+  - r-protr

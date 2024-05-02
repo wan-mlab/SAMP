@@ -6,7 +6,7 @@ from sklearn.svm import SVC
 from sklearn import metrics
 
 class SAMP:
-    def __init__(self, dim, method, runs):
+    def __init__(self, dim=50, method='Gaussian', runs=10):
         self.models = []
         self.dim = dim
         self.method = method
@@ -59,16 +59,22 @@ class SAMP:
         return transformer.fit_transform(X)
 
     def train_svm(self, X, y, param_grid, cv_splits=10, random_state=1):
+        print("Starting SVM training using GridSearchCV...")
         svm_model = SVC(random_state=random_state)
         grid_search = GridSearchCV(svm_model, param_grid, cv=cv_splits, n_jobs=-1, scoring='accuracy')
         grid_search.fit(X, y)
-        return SVC(**grid_search.best_params_, random_state=random_state)
+        print("Grid search completed. Best parameters found.")
+        best_model = SVC(**grid_search.best_params_, random_state=random_state)
+        best_model.fit(X, y)
+        return best_model
 
     def fit(self, X, y):
         scores = pd.DataFrame()
         param_grid = {'C': [0.1, 1, 10, 100], 'gamma': [1, 0.1, 0.01, 0.001, 0.0001], 'kernel': ['rbf']}
         for i in range(self.runs):
-            X_transformed = self.random_projection(X, self.dim, self.method, i)
+            print(f"Starting run {i+1}/{self.runs}...")  # Progress of runs
+            X_transformed = self.random_projection(X, i)
+            print(f"Random projection {i+1} completed.")
             # Train model and store it
             model = self.train_svm(X_transformed, y, param_grid)
             self.models.append(model)
@@ -77,14 +83,15 @@ class SAMP:
             score = cross_val_predict(model, X_transformed, y, cv=KFold(n_splits=10, shuffle=True, random_state=i), method='decision_function')
             scores[f'Run_{i}'] = score
 
-        self.score_ensemble(scores, y, self.dim, self.runs)
+        self.score_ensemble(scores, y)
+        print("All runs completed. Ensemble scoring finished.")
 
     def predict(self, X, y):
         scores = pd.DataFrame()
         # Use the trained models to predict
         for i, model in enumerate(self.models):
-            X_test_transformed = self.random_projection(X, self.dim, self.method, i)
+            X_test_transformed = self.random_projection(X, i)
             score = model.decision_function(X_test_transformed)
             scores[f'Run_{i}'] = score
 
-        self.score_ensemble(scores, y, self.dim, len(self.models))
+        self.score_ensemble(scores, y)

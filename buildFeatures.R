@@ -1,10 +1,5 @@
-## First check availability of packages
-if(require('protr')){
-  library('protr')
-}else{
-  cat('###########Installing protr package in R###################')
-  install.packages('protr')
-}
+library('protr')
+library('Peptides')
 
 #' A set of helper functions for the buildFeature() function
 #' Helper functions include: divideSeq(), buildSAAC, and seqStats
@@ -168,8 +163,14 @@ buildFeatures <- function(ampFile,nonampFile,out,split1_prop=0.2,split2_prop=0.6
   res$labels <- labels
   
   cat('Finished!\n')
-  
-  write.csv(res,out)
+
+  output_path <- 'feature_matrix'
+  if (!dir.exists(output_path)) {
+    dir.create(output_path, recursive = TRUE)
+  }
+  file_path <- file.path(output_path, out)
+
+  write.csv(res,file_path)
   cat('Feature matrix stored in',out,'\n')
 }
 

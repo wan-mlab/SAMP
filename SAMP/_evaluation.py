@@ -1,5 +1,5 @@
+## This file is not a part of the original codebase, but it is a useful addition to the codebase.
 from sklearn import metrics
-
 def eval_metrics(y_true,y_pred,prob):
     print('Accuracy:', round(metrics.accuracy_score(y_true,y_pred),3))
     print('Precision:', round(metrics.precision_score(y_true, y_pred),3))

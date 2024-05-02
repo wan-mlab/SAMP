@@ -1,19 +1,19 @@
 import subprocess
 
 class FeatureBuilder:
-    def __init__(self, split1_prop, split2_prop):
+    def __init__(self, left_prop, middle_prop):
         """
         Initializes the FeatureBuilder with split proportions.
 
         Parameters:
         ----------------
-        split1_prop (float): First split (left-side) fraction of the peptide sequence.
-        split2_prop (float): Second split (middle) fraction of the peptide sequence.
+        left_prop (float): First split (left-side) fraction of the peptide sequence.
+        middle_prop (float): Second split (middle) fraction of the peptide sequence.
 
-        * split1_prop and split2_prop must be less than 1.
+        * left_prop and middle_prop must be less than 1.
         """
-        self.split1_prop = split1_prop
-        self.split2_prop = split2_prop
+        self.left_prop = left_prop
+        self.middle_prop = middle_prop
 
     def build(self, ampfile, nonampfile, out):
         """
@@ -29,7 +29,7 @@ class FeatureBuilder:
         ----------------
         Writes the feature matrix to the 'features' folder.
         """
-        command = f"Rscript buildFeatures.R {ampfile} {nonampfile} {out} {self.split1_prop} {self.split2_prop}"
+        command = f"Rscript buildFeatures.R {ampfile} {nonampfile} {out} {self.left_prop} {self.middle_prop}"
         process = subprocess.Popen(command, stdout=subprocess.PIPE, shell=True)
 
         # Print output
