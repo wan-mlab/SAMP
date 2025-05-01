@@ -1,5 +1,4 @@
-# SAMP
-SAMP: a Split amino acid composition based AntiMicrobial Prediction model
+# SAMP : a Split amino acid composition based AntiMicrobial Prediction model
 
 SAMP is an ensemble random projection (RP) based computational model that leverages a new type of features called proportionalized split amino acid composition (PSAAC) in addition to conventional sequence-based features for AMP prediction. SAMP also incorporates the ensemble RP architecture to process large scale AMP screening.
 
