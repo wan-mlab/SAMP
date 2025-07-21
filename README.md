@@ -2,7 +2,8 @@
 
 SAMP is an ensemble random projection (RP) based computational model that leverages a new type of features called proportionalized split amino acid composition (PSAAC) in addition to conventional sequence-based features for AMP prediction. SAMP also incorporates the ensemble RP architecture to process large scale AMP screening.
 
-Preprint: Junxi Feng, Mengtao Sun, Cong Liu, Weiwei Zhang, Changmou Xu, Jieqiong Wang, Guangshun Wang, Shibiao Wan ["SAMP: Identifying Antimicrobial Peptides by an Ensemble Learning Model Based on Proportionalized Split Amino Acid Composition. *bioRxiv, 2024.04.25.590553v1* (2024)."](https://www.biorxiv.org/content/10.1101/2024.04.25.590553v1)
+# Publication 
+SAMP: Identifying antimicrobial peptides by an ensemble learning model based on proportionalized split amino acid composition. Junxi Feng, Mengtao Sun, Cong Liu, Weiwei Zhang, Changmou Xu, Jieqiong Wang, Guangshun Wang and Shibiao Wan ["SAMP: Identifying Antimicrobial Peptides by an Ensemble Learning Model Based on Proportionalized Split Amino Acid Composition. Briefings in Functional Genomics, 2024, 23, 879–890. DOI:https://doi.org/10.1093/bfgp/elae046
 
 ## Table of Contents (Under construction)
 
